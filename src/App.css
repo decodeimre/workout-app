@@ -1,0 +1,119 @@
+#root {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  --main-color: #31a6bd;
+}
+
+.header {
+  font-size: 4rem;
+  color: var(--main-color);
+}
+.header span {
+  font-size: 2rem;
+  color: white;
+}
+
+.exercise-overview {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.exercise-card {
+  margin: 1rem auto;
+  border: 2px solid var(--main-color);
+  border-radius: 10px;
+  width: 250px;
+  height: 300px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 2rem;
+}
+
+nav ul li {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--main-color)
+}
+
+.schedule-workout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workout-selection-form {
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+select {
+  font-size: 1.5rem;
+}
+
+.workout-selection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.dayTabs,
+.workoutWeek {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weekday {
+  margin: 0 5px 0 5px;
+  cursor: pointer;
+  color: black;
+  text-shadow: 2px 1px white;
+  font-size: 2rem;
+  min-width: 200px;
+  background-color: var(--main-color);
+}
+
+.submitWorkoutBtn {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: var(--main-color);
+}
+
+.workoutDay {
+  display: flex;
+  flex-direction: column;
+}
+
+.workoutDisplay {
+  padding: 0.5rem 0 1rem 0;
+  width: 200px;
+  margin: 1.5rem 5px 0 5px;
+  background-color: #3d3d3d;
+}
+
+.workoutDisplay h4 {
+  color: var(--main-color);
+  margin-bottom: 0;
+}
+
+.workoutDisplay p {
+  margin: 0;
+}
+
+.workout-Btn {
+  background-color: var(--main-color);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin: .2rem;
+}
