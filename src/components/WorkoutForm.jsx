@@ -74,6 +74,7 @@ export function WorkoutForm({ muscleGroups }) {
               onChange={handleDaySelect}
               value={weekday ? weekday : ""}
             >
+              <option value="">- select day -</option>
               <option value="Monday">Monday</option>
               <option value="Tuesday">Tuesday</option>
               <option value="Wednesday">Wednesday</option>
