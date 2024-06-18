@@ -9,7 +9,7 @@ export function Navbar() {
             <li>Home </li>
           </NavLink>
 
-          <NavLink to="/schedule/Monday">
+          <NavLink to="/schedule/">
             <li>Plan your Workout</li>
           </NavLink>
 
