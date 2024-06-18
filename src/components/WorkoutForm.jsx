@@ -43,14 +43,19 @@ export function WorkoutForm({ muscleGroups }) {
       return savedWorkouts.Weekday === workout.Weekday;
     });
     if (existingWorkout) {
-      if (window.confirm("There is already a workout set for that day! Do you want to overwrite it?")) {
-      return dispatch({ type: "UPDATE_WORKOUT", payload: workout });
-      
+      if (
+        window.confirm(
+          "There is already a workout set for that day! Do you want to overwrite it?"
+        )
+      ) {
+        dispatch({ type: "UPDATE_WORKOUT", payload: workout });
+        navigate("/");
+      }
     } else {
       dispatch({ type: "ADD_WORKOUT", payload: workout });
       navigate("/");
     }
-  }}
+  };
 
   return (
     <div className="schedule-workout">

@@ -1,10 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { WorkoutDisplay } from "./WorkoutDisplay";
 import { workoutWeekContext } from "../context/WorkoutWeekContext";
 import { NavLink } from "react-router-dom";
 
 export function Home() {
   const { weeklyWorkout, dispatch } = useContext(workoutWeekContext);
+  const [ showWorkout, setShowWorkout ] = useState({
+    Monday: false,
+    Tuesday: false,
+    Wednesday: false,
+    Thursday: false,
+    Friday: false,
+    Saturday: false,
+    Sunday: false,
+  });
 
   const weekDays = [
     "Monday",
@@ -16,6 +25,23 @@ export function Home() {
     "Sunday",
   ];
 
+  const handleDelete = (e) => {
+    if (window.confirm("Sure you want to delete this workout?")) {
+      dispatch({
+        type: "DELETE_WORKOUT",
+        payload: e.target.value,
+      });
+    }
+  };
+
+  const handleShowWorkout = (e) => {
+    const day = e.target.value;
+    setShowWorkout((prevShowWorkout) => ({
+      ...prevShowWorkout,
+      [day]: !prevShowWorkout[day],
+    }));
+  }
+
   return (
     <>
       <h1>Welcome to your weekly Workout Schedule</h1>
@@ -26,20 +52,10 @@ export function Home() {
           );
           return (
             <div key={index} className="workoutDay">
-              <button value={day} className="weekday">
+              <button onClick={(e) => handleShowWorkout(e)} value={day} className="weekday">
                 {day}
               </button>
-
-              {!dailyWorkout ? (
-                <div className="workoutDisplay">
-                  <h3>no workout planned</h3>
-                  <NavLink to={`/schedule/${day}`}>
-                    <button value={day} className="workout-Btn">
-                      plan workout
-                    </button>
-                  </NavLink>
-                </div>
-              ) : (
+              {dailyWorkout && showWorkout[day] && (
                 <div className="workoutDisplay">
                   {Object.keys(dailyWorkout)
                     .filter((key) => key !== "Weekday")
@@ -50,31 +66,35 @@ export function Home() {
 
                   <button
                     value={dailyWorkout.Weekday}
-                    onClick={(e) =>
-                      dispatch({
-                        type: "DELETE_WORKOUT",
-                        payload: e.target.value,
-                      })
-                    }
+                    onClick={handleDelete}
                     className="workout-Btn"
                   >
                     delete Workout
                   </button>
                   <NavLink to={`/schedule/${day}`}>
-                    <button
-                      value={dailyWorkout.Weekday}
-                      onClick={(e) =>
-                        dispatch({
-                          type: "UPDATE_WORKOUT",
-                          payload: e.target.value,
-                        })
-                      }
-                      className="workout-Btn"
-                    >
-                      Update
-                    </button>
+                    <button className="workout-Btn">Update</button>
                   </NavLink>
                 </div>
+              )}
+
+              {dailyWorkout && !showWorkout[day] && (
+                <div className="workoutDisplay">
+                  <h3 className="workout-planned">workout planned</h3>
+                  <button onClick={(e) => handleShowWorkout(e)} value={day} className="workout-Btn">
+                    show workout
+                  </button>
+                </div>
+              )}
+
+              {!dailyWorkout && (
+              <div className="workoutDisplay">
+                <h3 className="no-workout">no workout planned</h3>
+                <NavLink to={`/schedule/${day}`}>
+                  <button value={day} className="workout-Btn">
+                    plan workout
+                  </button>
+                </NavLink>
+              </div>
               )}
             </div>
           );
@@ -82,9 +102,4 @@ export function Home() {
       </div>
     </>
   );
-}
-
-
-function Button ({onClick, value, children}) {
-  return <button onClick={onClick} value={value} className="workout-Btn">{children}</button>
 }

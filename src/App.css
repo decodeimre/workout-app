@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  --main-color: #31a6bd;
+  --main-color: #10869b;
 }
 
 .header {
@@ -76,7 +76,7 @@ select {
   margin: 0 5px 0 5px;
   cursor: pointer;
   color: black;
-  text-shadow: 2px 1px white;
+  text-shadow: 2px 1px 2px #242424, 1px 2px 5px #242424cf;
   font-size: 2rem;
   min-width: 200px;
   background-color: var(--main-color);
@@ -116,4 +116,12 @@ select {
   font-size: 1.2rem;
   padding: 0.5rem;
   margin: .2rem;
+}
+
+.no-workout {
+  color: rgb(201, 49, 49);
+}
+
+.workout-planned {
+  color: rgb(49, 201, 49);
 }

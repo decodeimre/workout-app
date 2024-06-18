@@ -1,19 +1,21 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 
 export function Navbar() {
   return (
     <>
       <nav>
         <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/schedule/Monday">Plan your Workout</NavLink>
-          </li>
-          <li>
-            <NavLink to="/overview">Exercise Overview</NavLink>
-          </li>
+          <NavLink to="/">
+            <li>Home </li>
+          </NavLink>
+
+          <NavLink to="/schedule/Monday">
+            <li>Plan your Workout</li>
+          </NavLink>
+
+          <NavLink to="/overview">
+            <li>Exercise Overview</li>
+          </NavLink>
         </ul>
       </nav>
       <Outlet />
