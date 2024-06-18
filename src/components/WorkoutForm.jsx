@@ -9,6 +9,11 @@ export function WorkoutForm({ muscleGroups }) {
   const { weekday } = useParams();
   const { weeklyWorkout, dispatch } = useContext(workoutWeekContext);
 
+  //check if there is a workout for that day already
+  const existingWorkout = weeklyWorkout.find((savedWorkouts) => {
+    return savedWorkouts.Weekday === workout.Weekday;
+  });
+
   useEffect(() => {
     setSelectedDay(weekday);
     //returns undefined if there is no workout for that day
@@ -38,10 +43,7 @@ export function WorkoutForm({ muscleGroups }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //check if there is a workout for that day already
-    const existingWorkout = weeklyWorkout.find((savedWorkouts) => {
-      return savedWorkouts.Weekday === workout.Weekday;
-    });
+
     if (existingWorkout) {
       if (
         window.confirm(
@@ -56,6 +58,10 @@ export function WorkoutForm({ muscleGroups }) {
       navigate("/");
     }
   };
+
+  const handleClearForm = () => {
+    setWorkout({})  
+  }
 
   return (
     <div className="schedule-workout">
@@ -77,6 +83,7 @@ export function WorkoutForm({ muscleGroups }) {
               <option value="Sunday">Sunday</option>
             </select>
           </div>
+          {existingWorkout && <div className="workout-Btn" onClick={handleClearForm}>Clear</div>}
           {
             //object.keys to return array of keys(target muscle) - then map()
             Object.keys(muscleGroups).map((targetMuscle, index) => {
@@ -111,6 +118,7 @@ export function WorkoutForm({ muscleGroups }) {
               );
             })
           }
+          
           <button className="submitWorkoutBtn" type="submit">
             Save my Workout
           </button>
